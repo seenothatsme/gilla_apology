@@ -341,16 +341,10 @@
             hugCounter++;
             document.getElementById('hugCount').textContent = hugCounter;
             
-            // Play hug sound effect
-            if (!hugSound) {
-                hugSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMdSiR2O/AeSzuT');
-                hugSound.volume = 0.5;
-            }
-            hugSound.currentTime = 0; // Reset to start for rapid clicking
-            hugSound.play().catch(e => console.log('Sound play failed:', e));
+          
             
             // Every 5 hugs, create heart explosion
-            if (hugCounter % 5 === 0) {
+            if (hugCounter % 3 === 0) {
                 createHeartExplosion();
             }
         }
