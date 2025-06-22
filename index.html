@@ -32,7 +32,7 @@
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .welcome-message {
@@ -117,6 +117,7 @@
 
         .hug-section {
             display: none;
+            position: relative;
         }
 
         .hug-btn {
@@ -130,6 +131,8 @@
             margin: 20px 0;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
         }
 
         .hug-btn:hover {
@@ -147,8 +150,9 @@
         .heart-explosion {
             position: absolute;
             pointer-events: none;
-            font-size: 24px;
+            font-size: 28px;
             animation: heartFloat 2s ease-out forwards;
+            z-index: 20;
         }
 
         @keyframes fadeIn {
@@ -178,11 +182,15 @@
         @keyframes heartFloat {
             0% {
                 opacity: 1;
-                transform: translate(0, 0) scale(1);
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translate(var(--random-x, 0), -50px) scale(1.2) rotate(180deg);
             }
             100% {
                 opacity: 0;
-                transform: translate(0, -100px) scale(1.5);
+                transform: translate(var(--random-x, 0), -120px) scale(0.5) rotate(360deg);
             }
         }
 
@@ -341,40 +349,72 @@
             hugCounter++;
             document.getElementById('hugCount').textContent = hugCounter;
             
-          
-            
-            // Every 5 hugs, create heart explosion
+            // Create heart explosion every 3 hugs
             if (hugCounter % 3 === 0) {
                 createHeartExplosion();
+            } else {
+                // Create a single heart for other hugs
+                createSingleHeart();
             }
         }
 
+        function createSingleHeart() {
+            const hugSection = document.querySelector('.hug-section');
+            const heart = document.createElement('div');
+            heart.textContent = '💖';
+            heart.className = 'heart-explosion';
+            
+            // Position relative to hug button
+            const hugBtn = document.querySelector('.hug-btn');
+            const btnRect = hugBtn.getBoundingClientRect();
+            const sectionRect = hugSection.getBoundingClientRect();
+            
+            heart.style.left = '50%';
+            heart.style.top = '50%';
+            heart.style.setProperty('--random-x', (Math.random() - 0.5) * 100 + 'px');
+            
+            hugSection.appendChild(heart);
+            
+            // Remove heart after animation
+            setTimeout(() => {
+                if (heart.parentNode) {
+                    heart.parentNode.removeChild(heart);
+                }
+            }, 2000);
+        }
+
         function createHeartExplosion() {
-            const container = document.querySelector('.container');
-            const numHearts = 8;
+            const hugSection = document.querySelector('.hug-section');
+            const numHearts = 12;
+            const hearts = ['💖', '💕', '💗', '💓', '❤️', '🧡', '💛', '💚', '💙', '💜'];
             
             for (let i = 0; i < numHearts; i++) {
                 const heart = document.createElement('div');
-                heart.textContent = '💖';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
                 heart.className = 'heart-explosion';
                 
-                // Random position around the button
-                const angle = (360 / numHearts) * i;
-                const radius = 100;
+                // Random positioning around the button
+                const angle = (360 / numHearts) * i + Math.random() * 30;
+                const radius = 80 + Math.random() * 40;
                 const x = Math.cos(angle * Math.PI / 180) * radius;
                 const y = Math.sin(angle * Math.PI / 180) * radius;
                 
-                heart.style.left = `calc(50% + ${x}px)`;
-                heart.style.top = `calc(50% + ${y}px)`;
+                heart.style.left = '50%';
+                heart.style.top = '50%';
+                heart.style.transform = `translate(${x}px, ${y}px)`;
+                heart.style.setProperty('--random-x', (Math.random() - 0.5) * 80 + 'px');
                 
-                container.appendChild(heart);
+                // Add random delay for more organic effect
+                heart.style.animationDelay = Math.random() * 0.3 + 's';
+                
+                hugSection.appendChild(heart);
                 
                 // Remove heart after animation
                 setTimeout(() => {
                     if (heart.parentNode) {
                         heart.parentNode.removeChild(heart);
                     }
-                }, 2000);
+                }, 2500);
             }
         }
 
