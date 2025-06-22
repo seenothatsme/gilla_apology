@@ -3,271 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apology Quiz 💕</title>
+    <title>Apology Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Comic Neue', 'Comic Sans MS', cursive;
-            background: linear-gradient(135deg, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             padding: 20px;
         }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
+
         .container {
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
             padding: 40px;
             max-width: 500px;
             width: 100%;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
-        
-        .section {
+
+        .welcome-message {
+            font-size: 18px;
+            color: #6b5b95;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .question {
             display: none;
-        }
-        
-        .section.active {
-            display: block;
             animation: fadeIn 0.5s ease-in;
         }
-        
+
+        .question.active {
+            display: block;
+        }
+
+        .question h2 {
+            font-size: 20px;
+            color: #6b5b95;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .answer-btn {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            margin: 15px 0;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            border: none;
+            border-radius: 25px;
+            color: #6b5b95;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .answer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .next-btn {
+            background: linear-gradient(45deg, #a8e6cf, #88d8a3);
+            margin-top: 30px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            color: #2d5d3f;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        .vibrate {
+            animation: vibrate 0.5s;
+        }
+
+        .final-message {
+            display: none;
+            font-size: 18px;
+            color: #6b5b95;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .hug-section {
+            display: none;
+        }
+
+        .hug-btn {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #6b5b95;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hug-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .hug-counter {
+            font-size: 16px;
+            color: #6b5b95;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        .heart-explosion {
+            position: absolute;
+            pointer-events: none;
+            font-size: 24px;
+            animation: heartFloat 2s ease-out forwards;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        h1 {
-            color: #ff6b9d;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .welcome-text {
-            font-size: 1.3em;
-            color: #666;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-        
-        .question-text {
-            font-size: 1.5em;
-            color: #ff6b9d;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
-        
-        .btn {
-            background: linear-gradient(45deg, #ff6b9d, #ffa8cc);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            font-family: inherit;
-            border-radius: 50px;
-            cursor: pointer;
-            margin: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
-            min-width: 200px;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
-        }
-        
-        .btn:active {
-            transform: translateY(0);
-        }
-        
-        .answer-btn {
-            display: block;
-            width: 100%;
-            margin: 15px 0;
-        }
-        
-        .shake {
-            animation: shake 0.5s ease-in-out;
-        }
-        
+
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
         }
-        
-        .vibrate {
-            animation: vibrate 0.3s ease-in-out;
-        }
-        
+
         @keyframes vibrate {
             0%, 100% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
+            10% { transform: translate(-1px, -1px); }
+            20% { transform: translate(1px, -1px); }
+            30% { transform: translate(-1px, 1px); }
+            40% { transform: translate(1px, 1px); }
+            50% { transform: translate(-1px, -1px); }
+            60% { transform: translate(1px, -1px); }
+            70% { transform: translate(-1px, 1px); }
+            80% { transform: translate(1px, 1px); }
+            90% { transform: translate(-1px, -1px); }
         }
-        
-        .hug-counter {
-            font-size: 1.5em;
-            color: #ff6b9d;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-        
-        .hearts-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
-        }
-        
-        .heart {
-            position: absolute;
-            font-size: 2em;
-            color: #ff6b9d;
-            animation: floatUp 3s ease-out forwards;
-        }
-        
-        @keyframes floatUp {
+
+        @keyframes heartFloat {
             0% {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translate(0, 0) scale(1);
             }
             100% {
                 opacity: 0;
-                transform: translateY(-200px) scale(1.5);
+                transform: translate(0, -100px) scale(1.5);
             }
         }
-        
-        .final-message {
-            font-size: 1.4em;
-            color: #666;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-        
-        @media (max-width: 600px) {
+
+        @media (max-width: 480px) {
             .container {
                 padding: 30px 20px;
-                margin: 10px;
             }
             
-            h1 {
-                font-size: 2em;
+            .welcome-message, .question h2, .final-message {
+                font-size: 16px;
             }
             
-            .welcome-text, .final-message {
-                font-size: 1.1em;
-            }
-            
-            .question-text {
-                font-size: 1.3em;
-            }
-            
-            .btn {
-                padding: 12px 25px;
-                font-size: 1.1em;
-                min-width: 180px;
+            .answer-btn, .next-btn, .hug-btn {
+                font-size: 14px;
+                padding: 12px 20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="hearts-container" id="heartsContainer"></div>
-    
     <div class="container">
-        <!-- Welcome Section -->
-        <div class="section active" id="welcome">
-            <h1>💕 Apology Quiz 💕</h1>
-            <div class="welcome-text">
+        <div class="welcome-section">
+            <p class="welcome-message">
                 Hi babycito. I am sorry for my messups. I'm working on something more to win back your apology, but this is something to get started.
-            </div>
-            <button class="btn" onclick="startQuiz()">Next</button>
+            </p>
+            <button class="next-btn" onclick="startQuiz()">Next</button>
         </div>
-        
-        <!-- Question Sections -->
-        <div class="section" id="question1">
-            <div class="question-text">What makes you smile the most?</div>
-            <button class="btn answer-btn" onclick="wrongAnswer(this)">Banana peel</button>
-            <button class="btn answer-btn" onclick="rightAnswer(this, 2)">You, obviously</button>
+
+        <div class="question" id="question1">
+            <h2>Who's the bestest human in the world?</h2>
+            <button class="answer-btn" onclick="rightAnswer(this, 1)">You, obviously</button>
+            <button class="answer-btn" onclick="wrongAnswer(this)">Alexander McQueen</button>
         </div>
-        
-        <div class="section" id="question2">
-            <div class="question-text">What's the most beautiful thing in the world?</div>
-            <button class="btn answer-btn" onclick="wrongAnswer(this)">A rusty spoon</button>
-            <button class="btn answer-btn" onclick="rightAnswer(this, 3)">Your gorgeous smile</button>
+
+        <div class="question" id="question2">
+            <h2>Who does the idiot giant love the most?</h2>
+            <button class="answer-btn" onclick="wrongAnswer(this)">His video games</button>
+            <button class="answer-btn" onclick="rightAnswer(this, 2)">You (duh)</button>
         </div>
-        
-        <div class="section" id="question3">
-            <div class="question-text">What do I think about most?</div>
-            <button class="btn answer-btn" onclick="wrongAnswer(this)">Pickled onions</button>
-            <button class="btn answer-btn" onclick="rightAnswer(this, 4)">How lucky I am to have you</button>
+
+        <div class="question" id="question3">
+            <h2>What should you do right now?</h2>
+            <button class="answer-btn" onclick="rightAnswer(this, 3)">Give him a tiny forgiving hug</button>
+            <button class="answer-btn" onclick="wrongAnswer(this)">Block the giant forever</button>
         </div>
-        
-        <div class="section" id="question4">
-            <div class="question-text">What's my favorite sound?</div>
-            <button class="btn answer-btn" onclick="wrongAnswer(this)">Nails on chalkboard</button>
-            <button class="btn answer-btn" onclick="rightAnswer(this, 5)">Your sweet laughter</button>
+
+        <div class="question" id="question4">
+            <h2>What does the giant want more than anything?</h2>
+            <button class="answer-btn" onclick="wrongAnswer(this)">A lifetime supply of shawarma</button>
+            <button class="answer-btn" onclick="rightAnswer(this, 4)">Your forgiveness and your love</button>
         </div>
-        
-        <div class="section" id="question5">
-            <div class="question-text">What makes everything better?</div>
-            <button class="btn answer-btn" onclick="wrongAnswer(this)">Moldy cheese</button>
-            <button class="btn answer-btn" onclick="rightAnswer(this, 'final')">Being with you</button>
+
+        <div class="question" id="question5">
+            <h2>What should we do with the giant now?</h2>
+            <button class="answer-btn" onclick="rightAnswer(this, 5)">Let him hold our hand again</button>
+            <button class="answer-btn" onclick="wrongAnswer(this)">Banish him to the Shadow Realm</button>
         </div>
-        
-        <!-- Final Section -->
-        <div class="section" id="final">
-            <h1>💖 Thank You 💖</h1>
-            <div class="final-message">
+
+        <div class="final-section">
+            <p class="final-message">
                 Thank you baby, for keeping up with my shit. I hope you feel a little better?
+            </p>
+            <div class="hug-section">
+                <button class="hug-btn" onclick="sendHug()">Send me a hug 🤗</button>
+                <p class="hug-counter">Hugs sent: <span id="hugCount">0</span></p>
             </div>
-            <button class="btn" onclick="sendHug()">Send me a hug 🤗</button>
-            <div class="hug-counter" id="hugCounter">Hugs sent: 0</div>
         </div>
     </div>
-    
+
     <script>
-        let hugCount = 0;
-        
+        let currentQuestion = 0;
+        let hugCounter = 0;
+
         function startQuiz() {
-            showSection('question1');
+            document.querySelector('.welcome-section').style.display = 'none';
+            document.getElementById('question1').classList.add('active');
+            currentQuestion = 1;
         }
-        
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => section.classList.remove('active'));
-            
-            // Show target section
-            document.getElementById(sectionId).classList.add('active');
-        }
-        
+
         function wrongAnswer(button) {
             // Vibrate if supported
             if (navigator.vibrate) {
@@ -276,82 +270,80 @@
             
             // Add shake animation to button
             button.classList.add('shake');
+            button.textContent = 'No no no 🙈';
             
             // Add vibrate animation to container
             document.querySelector('.container').classList.add('vibrate');
             
-            // Change button text
-            const originalText = button.textContent;
-            button.textContent = "No no no 🙈";
-            
-            // Reset after animation
+            // Remove animations after they complete
             setTimeout(() => {
                 button.classList.remove('shake');
                 document.querySelector('.container').classList.remove('vibrate');
-                button.textContent = originalText;
-            }, 1000);
+            }, 500);
         }
-        
-        function rightAnswer(button, nextSection) {
-            // Change button text
-            button.textContent = "🥹 You chose right!";
+
+        function rightAnswer(button, questionNum) {
+            button.textContent = '🥹 You chose right!';
+            button.style.background = 'linear-gradient(45deg, #a8e6cf, #88d8a3)';
             
-            // Disable both buttons
-            const buttons = button.parentElement.querySelectorAll('.answer-btn');
+            // Disable all buttons in current question
+            const currentQuestionDiv = document.getElementById(`question${questionNum}`);
+            const buttons = currentQuestionDiv.querySelectorAll('.answer-btn');
             buttons.forEach(btn => btn.disabled = true);
             
-            // Move to next section after delay
+            // Show next button or finish
             setTimeout(() => {
-                if (nextSection === 'final') {
-                    showSection('final');
+                if (questionNum < 5) {
+                    document.getElementById(`question${questionNum}`).classList.remove('active');
+                    document.getElementById(`question${questionNum + 1}`).classList.add('active');
+                    currentQuestion++;
                 } else {
-                    showSection('question' + nextSection);
+                    // Show final message
+                    document.getElementById(`question${questionNum}`).style.display = 'none';
+                    document.querySelector('.final-message').style.display = 'block';
+                    document.querySelector('.hug-section').style.display = 'block';
                 }
             }, 1500);
         }
-        
+
         function sendHug() {
-            hugCount++;
-            document.getElementById('hugCounter').textContent = `Hugs sent: ${hugCount}`;
+            hugCounter++;
+            document.getElementById('hugCount').textContent = hugCounter;
             
-            // Create heart explosion every 5 hugs
-            if (hugCount % 5 === 0) {
+            // Every 5 hugs, create heart explosion
+            if (hugCounter % 5 === 0) {
                 createHeartExplosion();
             }
         }
-        
+
         function createHeartExplosion() {
-            const container = document.getElementById('heartsContainer');
-            const heartCount = 15;
+            const container = document.querySelector('.container');
+            const numHearts = 8;
             
-            for (let i = 0; i < heartCount; i++) {
+            for (let i = 0; i < numHearts; i++) {
+                const heart = document.createElement('div');
+                heart.textContent = '💖';
+                heart.className = 'heart-explosion';
+                
+                // Random position around the button
+                const angle = (360 / numHearts) * i;
+                const radius = 100;
+                const x = Math.cos(angle * Math.PI / 180) * radius;
+                const y = Math.sin(angle * Math.PI / 180) * radius;
+                
+                heart.style.left = `calc(50% + ${x}px)`;
+                heart.style.top = `calc(50% + ${y}px)`;
+                
+                container.appendChild(heart);
+                
+                // Remove heart after animation
                 setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'heart';
-                    heart.textContent = '💖';
-                    
-                    // Random position
-                    heart.style.left = Math.random() * 100 + '%';
-                    heart.style.bottom = '0px';
-                    
-                    container.appendChild(heart);
-                    
-                    // Remove heart after animation
-                    setTimeout(() => {
-                        if (heart.parentNode) {
-                            heart.parentNode.removeChild(heart);
-                        }
-                    }, 3000);
-                }, i * 100);
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, 2000);
             }
         }
-        
-        // Remove animation classes after they complete
-        document.addEventListener('animationend', function(e) {
-            if (e.animationName === 'shake' || e.animationName === 'vibrate') {
-                e.target.classList.remove('shake', 'vibrate');
-            }
-        });
     </script>
 </body>
 </html>
