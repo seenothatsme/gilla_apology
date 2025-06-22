@@ -186,6 +186,26 @@
             }
         }
 
+        .audio-controls {
+            margin-top: 20px;
+        }
+
+        .audio-btn {
+            background: linear-gradient(45deg, #ddd6fe, #c4b5fd);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #6b5b95;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .audio-btn:hover {
+            transform: scale(1.05);
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 30px 20px;
@@ -255,11 +275,22 @@
     <script>
         let currentQuestion = 0;
         let hugCounter = 0;
+        let backgroundMusic;
 
         function startQuiz() {
             document.querySelector('.welcome-section').style.display = 'none';
             document.getElementById('question1').classList.add('active');
             currentQuestion = 1;
+            
+            // Start background music
+            if (!backgroundMusic) {
+                backgroundMusic = new Audio('bgmusic.mp3');
+                backgroundMusic.loop = true;
+                backgroundMusic.volume = 0.3; // Set to 30% volume so it's not overwhelming
+                backgroundMusic.play().catch(e => {
+                    console.log('Audio autoplay prevented:', e);
+                });
+            }
         }
 
         function wrongAnswer(button) {
@@ -310,6 +341,14 @@
             hugCounter++;
             document.getElementById('hugCount').textContent = hugCounter;
             
+            // Play hug sound effect
+            if (!hugSound) {
+                hugSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiR2O/AeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMdSiR2O/AeSzuT');
+                hugSound.volume = 0.5;
+            }
+            hugSound.currentTime = 0; // Reset to start for rapid clicking
+            hugSound.play().catch(e => console.log('Sound play failed:', e));
+            
             // Every 5 hugs, create heart explosion
             if (hugCounter % 5 === 0) {
                 createHeartExplosion();
@@ -342,6 +381,18 @@
                         heart.parentNode.removeChild(heart);
                     }
                 }, 2000);
+            }
+        }
+
+        function toggleMusic() {
+            if (backgroundMusic) {
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play();
+                    document.querySelector('.audio-btn').textContent = '🔊 Music';
+                } else {
+                    backgroundMusic.pause();
+                    document.querySelector('.audio-btn').textContent = '🔇 Music';
+                }
             }
         }
     </script>
