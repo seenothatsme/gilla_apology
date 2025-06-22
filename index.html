@@ -94,29 +94,25 @@
       <button onclick="nextBlock()">Next</button>
     </div>
 
-    $1
-
-<div class="block" id="final">
-  <p><strong>Thank you baby, for keeping up with my shit. I hope you feel a little better?</strong></p>
-  <button onclick="sendHug()">Send me a hug 🤗</button>
-  <p id="hug-count">Hugs sent: 0</p>
-</div>
+    <div class="block" id="final">
+      <p><strong>Thank you baby, for keeping up with my shit. I hope you feel a little better?</strong></p>
+      <button onclick="sendHug()">Send me a hug 🤗</button>
+      <p id="hug-count">Hugs sent: 0</p>
+    </div>
 
     <h2 id="final-msg"></h2>
   </div>
 
   <script>
     let current = 0;
+    const blocks = document.querySelectorAll('.block');
+
     function nextBlock() {
-  const blocks = document.querySelectorAll('.block');
-  if (current < blocks.length - 1) {
-    blocks[current].classList.remove('visible');
-    current++;
-    blocks[current].classList.add('visible');
-  } else if (current === blocks.length - 1) {
-    blocks[current].classList.remove('visible');
-    document.getElementById('final').classList.add('visible');
-  }
+      blocks[current].classList.remove('visible');
+      current++;
+      if (current < blocks.length) {
+        blocks[current].classList.add('visible');
+      }
     }
 
     function wrongAnswer(btn) {
@@ -130,36 +126,35 @@
       btn.style.backgroundColor = '#ffe6cc';
       btn.innerText = "🥹 You chose right!";
     }
+
     let hugCount = 0;
-  function sendHug() {
-  hugCount++;
-  document.getElementById('hug-count').innerText = `Hugs sent: ${hugCount}`;
+    function sendHug() {
+      hugCount++;
+      document.getElementById('hug-count').innerText = `Hugs sent: ${hugCount}`;
 
-  if (hugCount % 5 === 0) {
-    for (let i = 0; i < 20; i++) {
-      const emoji = document.createElement('div');
-      emoji.innerText = '💖';
-      emoji.style.position = 'fixed';
-      emoji.style.left = Math.random() * 100 + 'vw';
-      emoji.style.top = '100vh';
-      emoji.style.fontSize = '24px';
-      emoji.style.opacity = 1;
-      emoji.style.transition = 'top 2s ease-out, opacity 2s ease-out';
-      document.body.appendChild(emoji);
+      if (hugCount % 5 === 0) {
+        for (let i = 0; i < 20; i++) {
+          const emoji = document.createElement('div');
+          emoji.innerText = '💖';
+          emoji.style.position = 'fixed';
+          emoji.style.left = Math.random() * 100 + 'vw';
+          emoji.style.top = '100vh';
+          emoji.style.fontSize = '24px';
+          emoji.style.opacity = 1;
+          emoji.style.transition = 'top 2s ease-out, opacity 2s ease-out';
+          document.body.appendChild(emoji);
 
-      setTimeout(() => {
-        emoji.style.top = Math.random() * 50 + 'vh';
-        emoji.style.opacity = 0;
-      }, 10);
+          setTimeout(() => {
+            emoji.style.top = Math.random() * 50 + 'vh';
+            emoji.style.opacity = 0;
+          }, 10);
 
-      setTimeout(() => {
-        emoji.remove();
-      }, 2000);
+          setTimeout(() => {
+            emoji.remove();
+          }, 2000);
+        }
+      }
     }
-  }
-}`;
-  }
-
-$1
+  </script>
 </body>
 </html>
